@@ -28,7 +28,7 @@ def arr_to_tree arr
   root = TreeNode.new(tmp_arr.shift)
 
   tmp_arr.each do |val|
-    next if val.nil?
+    # next if val.nil?
     new_node = TreeNode.new(val)
     node = find_node_has_nil_subtree root
 
@@ -75,4 +75,24 @@ def tree_to_str root
   end
 
   str.sub(/^,/, '')
+end
+
+def tree_to_arr root
+  queue = [root]
+  arr = []
+  while queue.size > 0
+    pointer = queue.shift
+    arr << pointer&.val
+
+    if pointer&.val
+      queue.push pointer.left
+      queue.push pointer.right
+    end
+  end
+
+  while arr.last.nil?
+    arr.pop
+  end
+
+  arr
 end
