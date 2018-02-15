@@ -7,6 +7,15 @@ class TreeNode
     end
 end
 
+class TreeNodeWithRange
+    attr_accessor :val, :left, :right, :range
+    def initialize(val, range)
+        @val = val
+        @range = range
+        @left, @right = nil, nil
+    end
+end
+
 # 广度优先搜索
 def find_node_has_nil_subtree root
   queue = [root]
