@@ -16,6 +16,14 @@ class TreeNodeWithRange
     end
 end
 
+class TrieTreeNode
+    attr_accessor :val, :nodes
+    def initialize(val)
+        @val = val
+        @nodes = {}
+    end
+end
+
 # 广度优先搜索
 def find_node_has_nil_subtree root
   queue = [root]
