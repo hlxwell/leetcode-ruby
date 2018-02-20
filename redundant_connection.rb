@@ -36,17 +36,34 @@ def find_redundant_connection(edges)
 end
 
 def dfs_check_if_connected(start_node_id, end_node_id, graph, visited = {})
-  return false if !visited[start_node_id].nil? # 如果访问过了就代表还没有找到。
+  return false if visited.include? start_node_id # 如果访问过了就代表还没有找到。
 
-  visited[start_node_id] = true
+  visited[start_node_id] = true 
   return true if start_node_id == end_node_id
 
   # 遍历相邻的所有子节点
   graph[start_node_id].any? { |point_id| dfs_check_if_connected(point_id, end_node_id, graph, visited) }
 end
 
-pp find_redundant_connection edges
+def bfs_check_if_connected(start_node_id, end_node_id, graph, visited = {})
+  queue = []
+  queue.push start_node_id
+  while node = queue.shift
+    visited[node] = true
+    return true if node == end_node_id
+
+    graph[node].each do |connected_node|
+      # 没有访问过 + queue里面有加过
+      if !visited[connected_node] && !queue.include?(connected_node)
+        queue.push connected_node
+      end
+    end
+  end
+  false
+end
+
+# pp find_redundant_connection edges
 
 ### test if connected
-# graph = edges_to_adjacency_hash edges
-# pp dfs_check_if_connected 1, 5, graph
+graph = edges_to_adjacency_hash edges
+pp bfs_check_if_connected 1, 5, graph
