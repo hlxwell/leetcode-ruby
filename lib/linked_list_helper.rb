@@ -6,6 +6,13 @@ class ListNode
     end
 end
 
+def included_in_list? node, n
+  while node
+    return true if node.val == n
+    node = node.next
+  end
+end
+
 ## Loop way
 # def arr_to_linked_list arr
 #   input_arr = arr.dup
