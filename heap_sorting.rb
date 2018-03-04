@@ -8,11 +8,15 @@ heap = arr_to_tree [1,2,3,4,5,6,7]
 # 4   5  6   7
 
 def sort_heap root
+  # 递归
+  sort_heap(root.left) if root.left
+  sort_heap(root.right) if root.right
+
   left_value = root.left && root.left.val
   right_value = root.right && root.right.val
   current_value = root.val
   vals = [current_value, left_value, right_value].compact
-  return false if vals.size < 2 # 如果左右数为空直接返回
+  return false if vals.size < 2 # 如果左右树为空直接返回
 
   # 排序
   case vals.max
@@ -29,9 +33,6 @@ def sort_heap root
   else
   end
 
-  # 递归
-  sort_heap(root.left) if root.left
-  sort_heap(root.right) if root.right
   root
 end
 
