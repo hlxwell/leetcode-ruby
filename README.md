@@ -40,3 +40,7 @@
 - Brainteaser
 - Memoization
 - Minimax
+
+### 设计递归方法的原则
+1. 必须找到递归结束状态
+2. 如何分解参数，并且向下递归
