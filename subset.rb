@@ -38,7 +38,11 @@ def dfs nums, tmp, i
   # 结束: 循环结束
   i.upto(nums.size - 1) do |index|
     # 子问题: [嵌套层数..-1]
-    dfs nums, tmp + [nums[index]], index + 1
+    dfs(
+      nums, 
+      tmp + [nums[index]],
+      index + 1 # 子set的起始index
+    )
   end
 end
 
