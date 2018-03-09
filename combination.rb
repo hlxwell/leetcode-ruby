@@ -1,10 +1,7 @@
 # Notes
 # [1,2,3]的子问题是
 
-# 递归过程
-# 1层. [] 与 [1, 2, 3] 每个子元素组合
-# 2层. [1] 与 [2, 3] 每个子元素组合
-#      [2] 与 [3] 每个子元素组合
+# 递归过程 查看 recursive-analyse 图
 
 # def combine n, k
 #   (0..n).to_a.combination(k).to_a
@@ -22,8 +19,7 @@ end
 def dfs(sub_arr, index)
   # 结束条件
   if sub_arr.size == @comb_size
-    @result << sub_arr
-    return
+    return @result << sub_arr
   end
 
   # 找出子问题继续循环
