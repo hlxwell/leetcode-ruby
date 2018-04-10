@@ -1,7 +1,7 @@
 require "benchmark"
 
 class MichaelHash
-  SIZE = 10000
+  SIZE = 1_000_000
 
   attr :table
 
@@ -37,7 +37,7 @@ end
 
 hash = MichaelHash.new
 native_hash = {}
-ids = Array.new(rand(10000)) { rand(100000000000) }
+ids = Array.new(1_000_000) { rand(100000000000) }
 ids.each do |id|
   hash[id] = 1
   native_hash[id] = 1
@@ -55,11 +55,11 @@ puts Benchmark.measure {
   end
 }
 
-puts Benchmark.measure {
-  ids.each do |id|
-    ids.detect {|i| i == id}
-  end
-}
-
-### minimum the nil space.
-p hash.table.count {|i| i == nil }
+# puts Benchmark.measure {
+#   ids.each do |id|
+#     ids.detect {|i| i == id}
+#   end
+# }
+#
+# ### minimum the nil space.
+# p hash.table.count {|i| i == nil }
