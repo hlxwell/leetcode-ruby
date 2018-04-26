@@ -4,13 +4,18 @@
 # 4. 3 = 2 + 1
 # 3. 2 = 1 + 1
 # 2. 1 = 0 + 1
-# 1. 0
+# 1. 1
+# 0. 0
+
+# 1,1,2,3,5,8,13,21,34,55
 
 def fibonacci nth
-  return 0 if nth == 1
-  return 1 if nth == 2
+  return 0 if nth == 0
+  return 1 if nth == 1
 
   fibonacci(nth - 1) + fibonacci(nth - 2)
 end
 
-p fibonacci 10
+1.upto(10) do |nth|
+  p fibonacci nth
+end
