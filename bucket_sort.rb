@@ -7,7 +7,7 @@ def bucket_sort(arr)
   bucket = Array.new(arr_size) { [] }
   
   arr.each_with_index do |n, i|
-    bucket_index = n * arr_size / (max + 1)
+    bucket_index = n * arr_size / (max + 1) # <<< The key formular.
     bucket[bucket_index] << n
   end
 
