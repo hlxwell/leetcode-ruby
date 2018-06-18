@@ -1,39 +1,90 @@
-require 'pp'
-require_relative 'lib/tree_helper'
-
-heap = arr_to_tree [1,2,3,4,5,6,7]
-
-#      1
-#    2   3
-# 4   5  6   7
-
-def sort_heap root
-  # 递归
-  sort_heap(root.left) if root.left
-  sort_heap(root.right) if root.right
-
-  left_value = root.left && root.left.val
-  right_value = root.right && root.right.val
-  current_value = root.val
-  vals = [current_value, left_value, right_value].compact
-  return false if vals.size < 2 # 如果左右树为空直接返回
-
-  # 排序
-  case vals.max
-  when left_value then
-    tmp_val = root.val
-    root.val = root.left.val
-    root.left.val = tmp_val
-    swaped = true
-  when right_value then
-    tmp_val = root.val
-    root.val = root.right.val
-    root.right.val = tmp_val
-    swaped = true
-  else
+class MaxHeap
+  def initialize nums
+    @tree = []
+    nums.each { |num| self.push num }
   end
 
-  root
+  # bottom to top recursively swap
+  def push num
+    @tree << num
+    bottom_to_up_sort
+  end
+
+  # top to bottom recursively swap
+  def pop
+    top_node = @tree.shift
+    last_node = @tree.pop
+    @tree.unshift last_node
+    up_to_bottom_sort
+    top_node
+  end
+
+  def sorted_result
+    result = []
+    loop do
+      num = pop
+      break if num.nil?
+      result << num
+    end
+    result
+  end
+
+  private
+
+  def swap a, b
+    tmp = @tree[b]
+    @tree[b] = @tree[a]
+    @tree[a] = tmp
+  end
+
+  # i always be the left/right leaf
+  def bottom_to_up_sort i=nil
+    i ||= @tree.size - 1
+    return if i.zero?
+
+    parent = ((i - 1) / 2).floor
+    left = parent * 2 + 1
+    right = left + 1
+
+    if @tree[right].nil?
+      if @tree[left] > @tree[parent]
+        swap parent, left
+        bottom_to_up_sort parent
+      end
+    else
+      max_node = @tree[left] > @tree[right] ? left : right
+      if @tree[max_node] > @tree[parent]
+        swap parent, max_node
+        bottom_to_up_sort parent
+      end
+    end
+  end
+
+  # i always be the root
+  def up_to_bottom_sort i=0
+    return if i >= @tree.size
+
+    parent = i
+    left = parent * 2 + 1
+    right = left + 1
+
+    return if @tree[left].nil?
+
+    if @tree[right].nil?
+      if @tree[left] > @tree[parent]
+        swap parent, left
+        # no right, means already bottom, no need recurse
+      end
+    else
+      max_node = @tree[left] > @tree[right] ? left : right
+      if @tree[max_node] > @tree[parent]
+        swap parent, max_node
+        up_to_bottom_sort max_node
+      end
+    end
+  end
 end
 
-pp tree_to_str sort_heap heap
+# p sort [4, 1, 6, 8, 9, 2, 3]
+nums = Array.new(rand(100)) { rand(100) }
+p MaxHeap.new(nums).sorted_result == nums.sort.reverse

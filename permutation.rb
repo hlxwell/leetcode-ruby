@@ -6,7 +6,7 @@ def permute(nums)
   @result
 end
 
-def dfs nums, tmp
+def dfs(nums, tmp)
   @result << tmp if tmp.size == nums.size
   (nums - tmp).each { |n| dfs nums, tmp + [n] }
 end
