@@ -1,6 +1,6 @@
-# prices = [9,1,10,2,4,1,5,10,2]
+prices = [9,1,10,2,4,1,5,10,2]
 
-prices = [1,2]
+# prices = [1,2]
 
 # def max_profit(prices)
 #   return 0 if prices.size <= 1
