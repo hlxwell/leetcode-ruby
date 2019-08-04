@@ -23,6 +23,11 @@ func summaryRanges(nums []int) []string {
 		lastBucket = buckets[len(buckets)-1]
 		lastNum = lastBucket[len(lastBucket)-1]
 
+		// handle the duplicated elements
+		if nums[i] == lastNum {
+			continue
+		}
+
 		if nums[i] == lastNum+1 {
 			lastBucket = append(lastBucket, nums[i])
 			buckets[len(buckets)-1] = lastBucket
@@ -45,7 +50,7 @@ func summaryRanges(nums []int) []string {
 }
 
 func main() {
-	fmt.Println(summaryRanges([]int{1, 2, 4, 5, 6, 7, 9}))
+	fmt.Println(summaryRanges([]int{1, 2, 2, 2, 4, 5, 6, 7, 9}))
 	fmt.Println(summaryRanges([]int{}))
 	fmt.Println(summaryRanges([]int{1}))
 }
