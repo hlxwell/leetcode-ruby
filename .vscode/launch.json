@@ -5,20 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Local File",
-            "type": "Ruby",
+            "name": "GoLaunch",
+            "type": "go",
             "request": "launch",
-            "cwd": "${workspaceRoot}",
-            "program": "${workspaceRoot}/${file}"
-        },
-        {
-            "name": "Listen for rdebug-ide",
-            "type": "Ruby",
-            "request": "attach",
-            "cwd": "${workspaceRoot}",
-            "remoteHost": "127.0.0.1",
-            "remotePort": "1234",
-            "remoteWorkspaceRoot": "${workspaceRoot}"
+            "mode": "debug",
+            "remotePath": "",
+            "port": 2345,
+            "host": "127.0.0.1",
+            "program": "${fileDirname}",
+            "env": {},
+            "args": [],
+            "showLog": true,
+            "trace": true
         }
     ]
 }
