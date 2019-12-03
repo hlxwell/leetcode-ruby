@@ -1,11 +1,5 @@
 def quick_sort arr
   return arr if arr.size <= 1
-  if arr.size == 2
-    if arr[0] > arr[1]
-      arr[0], arr[1] = arr[1], arr[0]
-    end
-    return arr
-  end
 
   pivot_i = arr.size - 1
   left_i = 0
@@ -32,7 +26,7 @@ def quick_sort arr
   end
 
   pivot_i = left_i
-  left_side = arr[0..(pivot_i-1)]
+  left_side = pivot_i == 0 ? [] : arr[0..(pivot_i-1)]
   right_side = arr[(pivot_i+1)..(arr.size-1)]
 
   quick_sort(left_side) + [arr[pivot_i]] + quick_sort(right_side)
