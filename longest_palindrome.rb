@@ -4,15 +4,22 @@ def longest_palindrome str
     if str.size - 1 >= i+1 and str[i] == str[i+1]
       max_width = [i, (str.size-i-2)].min
       0.upto(max_width) do |j|
-        result = str[i-j..i+j+1] if (j+j+2) > result.size
-        break if str[i-j] != str[i+1+j]
+        if str[i-j] == str[i+1+j]
+          result = str[i-j..i+j+1] if (j+j+2) > result.size
+        else
+          break
+        end
       end
     end
 
     max_width = [i, (str.size-i-1)].min
     1.upto(max_width) do |j|
-      result = str[i-j..i+j] if (j+j+1) > result.size # size bigger than prev result                                              
-      break if str[i-j] != str[i+j]
+      # left == right, size bigger than prev result
+      if str[i-j] == str[i+j]
+        result = str[i-j..i+j] if (j+j+1) > result.size
+      else
+        break
+      end
     end
   end
   result
