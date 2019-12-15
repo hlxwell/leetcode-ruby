@@ -38,21 +38,33 @@ func lengthOfLongestSubstring2(s string) int {
 	startIndex := 0
 	for i := 0; i < len(s); i++ {
 		cache[s[i]]++
-		if cache[s[i]] > 1 {
-			if len(cache) > result {
-				result = countUniqMap(cache)
-			}
+		if hasDupValue(cache) {
 			cache[s[startIndex]]--
 			startIndex++
 		}
+
+		newLen := countUniqMap(cache)
+		if newLen > result {
+			result = newLen
+		}
 	}
+
 	return result
+}
+
+func hasDupValue(m map[byte]int) bool {
+	for _, v := range m {
+		if v > 1 {
+			return true
+		}
+	}
+	return false
 }
 
 func countUniqMap(m map[byte]int) int {
 	count := 0
 	for _, v := range m {
-		if v > 0 {
+		if v == 1 {
 			count++
 		}
 	}
@@ -62,7 +74,11 @@ func countUniqMap(m map[byte]int) int {
 func main() {
 	// fmt.Println(lengthOfLongestSubstring("bbbbb"))
 	// fmt.Println(lengthOfLongestSubstring("aabcdabc"))
-	fmt.Println(lengthOfLongestSubstring2("bbbbb"))
-	fmt.Println(lengthOfLongestSubstring2("aabcdabc"))
-	fmt.Println(lengthOfLongestSubstring2("pwwkew"))
+
+	fmt.Println(lengthOfLongestSubstring2("aab"))      // => 2
+	fmt.Println(lengthOfLongestSubstring2("abcdef"))   // => 6
+	fmt.Println(lengthOfLongestSubstring2("bbbbb"))    // => 1
+	fmt.Println(lengthOfLongestSubstring2("jbpnbwwd")) // => 4
+	fmt.Println(lengthOfLongestSubstring2("aabcdabc")) // => 4
+	fmt.Println(lengthOfLongestSubstring2("pwwkew"))   // => 3
 }
