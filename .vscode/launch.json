@@ -2,6 +2,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug Local File",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${file}"
+        },
+        {
             "name": "Go Launch",
             "type": "go",
             "request": "launch",
