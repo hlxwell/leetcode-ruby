@@ -19,16 +19,17 @@ def longest_consecutive(nums)
     end
   end
 
-  result = 1
-  while nums_cache.size > 0
-    n = nums_cache.keys.min
+  result = 0
+  nums.each do |n|
     count = 0
-    while nums_cache[n] != {}
-      n = nums_cache.delete(n)
-      count += 1
+    if nums_cache[n - 1].nil?
+      num = n
+      while !nums_cache[num].nil? && nums_cache[num] != {}
+        count += 1
+        num += 1
+      end
+      result = [result, count + 1].max
     end
-    nums_cache.delete(n)
-    result = [result, count + 1].max
   end
 
   result
