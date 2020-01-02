@@ -1,3 +1,4 @@
+# k elements in n permutation
 def permute(nums, k)
   @result, @nums, @k = [], nums, k
   dfs []
