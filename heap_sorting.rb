@@ -1,17 +1,21 @@
 class MaxHeap
-  def initialize nums
+  attr_accessor :tree
+
+  def initialize(nums)
     @tree = []
     nums.each { |num| self.push num }
   end
 
   # bottom to top recursively swap
-  def push num
+  def push(num)
     @tree << num
     bottom_to_up_sort
   end
 
   # top to bottom recursively swap
   def pop
+    return @tree.pop if @tree.size <= 1
+
     top_node = @tree.shift
     last_node = @tree.pop
     @tree.unshift last_node
@@ -31,14 +35,12 @@ class MaxHeap
 
   private
 
-  def swap a, b
-    tmp = @tree[b]
-    @tree[b] = @tree[a]
-    @tree[a] = tmp
+  def swap(a, b)
+    @tree[a], @tree[b] = @tree[b], @tree[a]
   end
 
   # i always be the left/right leaf
-  def bottom_to_up_sort i=nil
+  def bottom_to_up_sort(i = nil)
     i ||= @tree.size - 1
     return if i.zero?
 
@@ -61,7 +63,7 @@ class MaxHeap
   end
 
   # i always be the root
-  def up_to_bottom_sort i=0
+  def up_to_bottom_sort(i = 0)
     return if i >= @tree.size
 
     parent = i
@@ -86,5 +88,7 @@ class MaxHeap
 end
 
 # p sort [4, 1, 6, 8, 9, 2, 3]
-nums = Array.new(rand(100)) { rand(100) }
-p MaxHeap.new(nums).sorted_result == nums.sort.reverse
+nums = Array.new(rand(10)) { rand(100) }
+heap = MaxHeap.new(nums)
+heap.push 100
+p heap.pop == 100
