@@ -1,14 +1,12 @@
-nums = [1, 2, 3]
-
-def permute(nums)
-  @result = []
-  dfs nums, []
+def permute(nums, k)
+  @result, @nums, @k = [], nums, k
+  dfs []
   @result
 end
 
-def dfs(nums, tmp)
-  @result << tmp if tmp.size == nums.size
-  (nums - tmp).each { |n| dfs nums, tmp + [n] }
+def dfs(arr)
+  @result << arr if arr.size == @k
+  (@nums - arr).each { |n| dfs arr + [n] }
 end
 
-p permute nums
+p permute [1, 2, 3, 4], 3
