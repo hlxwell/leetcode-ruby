@@ -12,7 +12,7 @@ def longest_common_prefix(strs)
   return "" if strs.detect &:empty?
 
   str_i = strs.size - 1
-  char_i = 0 # strs.map { |s| s.size }.min - 1
+  char_i = 0
   finish = false
   result = []
 
