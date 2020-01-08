@@ -32,6 +32,13 @@ def quick_sort arr
   quick_sort(left_side) + [arr[pivot_i]] + quick_sort(right_side)
 end
 
+# Better solution
+def quick_sort(array)
+  return array if array.size < 2
+  left, right = array[1..-1].partition { |y| y <= array.first }
+  quick_sort(left) + [array.first] + quick_sort(right)
+end
+
 arr = rand(10).times.map { rand(100) }
 puts arr.inspect
 puts quick_sort(arr).inspect
