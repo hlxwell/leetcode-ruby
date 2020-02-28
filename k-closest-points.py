@@ -1,14 +1,14 @@
 import math
+from queue import PriorityQueue as Queue
 
 def kClosest(points, K):
-    cache = {}
+    q = Queue()
     for i in points:
         r = i[0] ** 2 + i[-1] ** 2
-        cache[str(i)] = math.sqrt(r)
-    return sorted(cache, key=lambda item: item)
+        q.put((str(i), math.sqrt(r)))
+    return list(map(lambda x: x[0], q.queue))
 
-result = kClosest([[1,2], [-1,-9], [2, 8]], 1)
-print(result)
+if __name__ == "__main__":
+    result = kClosest([[1, 2], [-1, -9], [2, 8]], 1)
+    print(result)
 
-# O(n) * O(1)
-# O(n*log(n))
