@@ -9,19 +9,15 @@ def top_duration_requests(filename, k = 10)
     if line.match(start_line_pattern)
       prev_url = $1
     elsif line.match(end_line_pattern)
-      result[prev_url] ||= []
-      result[prev_url] << $1.to_f
+      result[prev_url] ||= { c: 0, sum: 0 }
+      result[prev_url][:c] += 1
+      result[prev_url][:sum] += $1.to_f
     end
   end
 
   result.to_a.sort { |a, b|
-    avg(b.last) <=> avg(a.last)
+    (b[-1][:sum] / b[-1][:c]) <=> (a[-1][:sum] / a[-1][:c])
   }.take(k)
-end
-
-def avg(arr)
-  return 0 if !arr.is_a? Array or arr.size == 0
-  arr.sum / arr.size
 end
 
 puts top_duration_requests "rails.log", 10
