@@ -9,3 +9,4 @@ end
 s = "a b  cd efg"
 reverse_string s
 puts s
+
