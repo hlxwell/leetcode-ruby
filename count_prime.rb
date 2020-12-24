@@ -44,6 +44,6 @@ def count_prime n
   cache.count {|b| b}
 end
 
-puts Benchmark.measure { puts count_prime 100 }
-# puts Benchmark.measure { count_prime_fast 10000 }
-# puts Benchmark.measure { count_prime_slow 10000 }
+puts Benchmark.measure { count_prime 50000 }
+puts Benchmark.measure { count_prime_fast 50000 }
+puts Benchmark.measure { count_prime_slow 50000 }
