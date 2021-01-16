@@ -30,4 +30,3 @@ def dfs(sub_arr, index)
 end
 
 p combine 3, 2
-
