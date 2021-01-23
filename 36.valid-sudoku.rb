@@ -14,9 +14,8 @@ def is_valid_sudoku(board)
 
   # 1. check row
   board.each do |row|
-    newRow = row.dup
-    newRow.delete('.')
-    newRow.each {|i|
+    row.each {|i|
+      next if i == '.'
       rowHash[i] ||= 0
       rowHash[i] += 1
     }
