@@ -10,6 +10,7 @@
 # @return {Integer}
 def can_complete_circuit(gas, cost)
   return -1 if gas.size != cost.size
+  return -1 if gas.sum < cost.sum
 
   loop_size = gas.size
   current_gas = 0
@@ -21,9 +22,10 @@ def can_complete_circuit(gas, cost)
     loop do
       return i if (j - i) == loop_size
 
-      current_gas += gas[j % loop_size]
-      # puts "j: #{j}, current_gas: #{current_gas}. cur: #{j % loop_size}"
-      current_gas -= cost[j % loop_size]
+      current_station = j % loop_size
+      current_gas += gas[current_station]
+      # puts "j: #{j}, current_gas: #{current_gas}. cur: #{current_station}"
+      current_gas -= cost[current_station]
       j += 1
 
     break if current_gas.negative?
