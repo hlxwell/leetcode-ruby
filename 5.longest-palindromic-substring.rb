@@ -34,5 +34,29 @@ def longest_palindrome(s)
   result
 end
 
-# pp longest_palindrome("aabaab")
+def longest_palindrome_dp(str)
+  max_width = 0
+  max_index = 0
+  memo = [1] * str.size
+
+  2.upto(str.size) do |width|
+    0.upto(str.size - width) do |i|
+      if width > 3
+        memo[i] = width if str[i] == str[i+width-1] && memo[i+1] == width - 2
+      else
+        memo[i] = width if str[i] == str[i+width-1]
+      end
+    end
+  end
+
+  memo.each_with_index do |n, i|
+    if n > max_width
+      max_width = n
+      max_index = i
+    end
+  end
+
+  str[max_index..(max_index+max_width-1)]
+end
+
 # @lc code=end
