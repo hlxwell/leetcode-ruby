@@ -1,12 +1,13 @@
-require 'pp'
+require "pp"
 
 class UnionFind
   attr_accessor :forest, :ranks
+
   def initialize
     @forest = {}
     @ranks = {}
   end
-  
+
   # It means find parent for node.
   def find(node)
     if @forest[node].nil?
@@ -44,7 +45,7 @@ class UnionFind
   end
 end
 
-edges = [[1,2], [2,3], [3,4], [1,4], [1,5]]
+edges = [[1, 2], [2, 3], [3, 4], [1, 4], [1, 5]]
 
 union_find = UnionFind.new
 merge_results = []

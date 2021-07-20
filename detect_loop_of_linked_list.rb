@@ -3,7 +3,7 @@
 require_relative "lib/linked_list_helper"
 
 # loop the node
-def loop_the_linked_list head
+def loop_the_linked_list(head)
   node = head
   while node
     if node.next.nil?
@@ -15,7 +15,7 @@ def loop_the_linked_list head
   head
 end
 
-def is_loop? head
+def is_loop?(head)
   slow = head
   return false if slow.next.nil?
   fast = slow.next
@@ -34,8 +34,8 @@ def is_loop? head
   false
 end
 
-head1 = loop_the_linked_list arr_to_linked_list([1,2,3,4,5,6,7])
-head2 = arr_to_linked_list [1,2,3,4,5,6,7]
+head1 = loop_the_linked_list arr_to_linked_list([1, 2, 3, 4, 5, 6, 7])
+head2 = arr_to_linked_list [1, 2, 3, 4, 5, 6, 7]
 
 p is_loop? head1
 p is_loop? head2

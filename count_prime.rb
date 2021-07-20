@@ -1,7 +1,7 @@
-require 'benchmark'
+require "benchmark"
 require "pp"
 
-def count_prime_slow n
+def count_prime_slow(n)
   return 0 if n <= 2
 
   (3...n).step(2).count do |num|
@@ -9,25 +9,25 @@ def count_prime_slow n
   end + 1
 end
 
-def count_prime_fast n
+def count_prime_fast(n)
   return 0 if n <= 2
   cache = Array.new n, true
   cache[0] = false
   cache[1] = false
 
-  (2..n**(1.0/2)).each do |i|
+  (2..n ** (1.0 / 2)).each do |i|
     next if !cache[i]
-    (i*i...n).step(i).each do |x|
+    (i * i...n).step(i).each do |x|
       cache[x] = false
     end
   end
 
-  cache.count {|b| b}
+  cache.count { |b| b }
 end
 
 # Simple version
 # https://hooyes.net/2016/08/javascript-prime-number/
-def count_prime n
+def count_prime(n)
   return 0 if n <= 2
   cache = Array.new n, true
   cache[0] = false
@@ -41,7 +41,7 @@ def count_prime n
     end
   end
 
-  cache.count {|b| b}
+  cache.count { |b| b }
 end
 
 puts Benchmark.measure { count_prime 50000 }

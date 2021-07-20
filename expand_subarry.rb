@@ -1,5 +1,6 @@
 @solutions = []
-def iterate_arr arr
+
+def iterate_arr(arr)
   if arr.none? { |elem| elem.is_a? Array }
     @solutions << arr
     return
@@ -19,5 +20,5 @@ def iterate_arr arr
   end
 end
 
-iterate_arr [1,2,[3,4],5,[6,7]]
+iterate_arr [1, 2, [3, 4], 5, [6, 7]]
 pp @solutions

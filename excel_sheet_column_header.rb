@@ -11,8 +11,8 @@
 # 1 * 26 + 26 = 52 = AZ √
 # 2 * 26 + 26 = 52 = AZ √
 
-def convert_to_title n
-  s = ''
+def convert_to_title(n)
+  s = ""
   while n > 0
     n -= 1 # n % 26 => 0..25
     s = (n % 26 + 65).chr + s
