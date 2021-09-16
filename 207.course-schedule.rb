@@ -10,7 +10,7 @@
 # @return {Boolean}
 def can_finish(num_courses, prerequisites)
   @visited = {}
-  @stack = []
+  @visiting = {}
   @adj = {}
 
   courses = prerequisites.flatten.uniq
@@ -35,14 +35,14 @@ end
 
 def dfs(course)
   return true if @visited[course]
-  return false if @stack.include?(course)
+  return false if !@visiting[course].nil?
 
-  @stack.push course
+  @visiting[course] = true
 
   # puts @adj[course].inspect
   if @adj[course].empty?
     @visited[course] = true
-    @stack.pop
+    @visiting.delete course
     return true
   end
 
@@ -51,7 +51,7 @@ def dfs(course)
     return false if !dfs(c)
   end
 
-  @stack.pop
+  @visiting.delete course
   @visited[course] = true
   true
 end
