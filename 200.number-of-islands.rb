@@ -7,7 +7,6 @@
 # @lc code=start
 # @param {Character[][]} grid
 # @return {Integer}
-
 @tmp_grid = nil
 
 def num_islands(grid)
@@ -29,8 +28,6 @@ def num_islands(grid)
     end
   end
 
-  puts @tmp_grid.inspect
-
   count
 end
 
@@ -41,18 +38,22 @@ def dfs(row, col)
 
   is_last_row = row == (@tmp_grid.size - 1)
   is_last_col = col == (@tmp_grid[0].size - 1)
+  is_first_row = row == 0
+  is_first_col = col == 0
 
   dfs(row, col + 1) if !is_last_col && @tmp_grid[row][col + 1] == "1"
   dfs(row + 1, col) if !is_last_row && @tmp_grid[row + 1][col] == "1"
+
+  dfs(row, col - 1) if !is_first_col && @tmp_grid[row][col - 1] == "1"
+  dfs(row - 1, col) if !is_first_row && @tmp_grid[row - 1][col] == "1"
 end
 
 # @lc code=end
 
 grid = [
-  ["1", "1", "1", "1", "0"],
-  ["1", "1", "0", "1", "0"],
-  ["1", "1", "0", "0", "0"],
-  ["0", "0", "0", "0", "0"],
+  ["1", "1", "1"],
+  ["0", "1", "0"],
+  ["1", "1", "1"],
 ]
 
 puts num_islands(grid)
