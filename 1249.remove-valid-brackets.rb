@@ -18,10 +18,12 @@ def remove_brackets str
     else
       stack.push c
     end
+
+    puts "stack: #{stack.inspect}"
   end
 
   stack.join
 end
 
 puts remove_brackets '1(a)b(c(d)e)f)'
-puts remove_brackets '1(a)b(c(d())ef)'
+# puts remove_brackets '1(a)b(c(d())ef)'
